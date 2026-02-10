@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz | DBI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Quiz</h1>
+    <nav>
+        <a href="index.html">Strona Główna</a>
+        <a href="zagrozenia.html">Zagrożenia</a>
+        <a href="hasla.html">Hasła</a>
+        <a href="hejt.html">Hejt</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="kontakt.html">Kontakt</a>
+    </nav>
+</header>
+
+<br>
+
+<section class="quiz">
+  <div class="card">
+    <h2>Quiz: Bezpieczny Internet</h2>
+
+    <p id="question"></p>
+
+    <div id="answers"></div>
+
+    <button id="next" disabled>Dalej</button>
+
+    <p id="result"></p>
+  </div>
+</section>
+
+
+<script>
+const quiz = [
+  {
+    q: "Co to jest phishing?",
+    a: ["Rodzaj wirusa", "Wyłudzanie danych", "Hasło"],
+    correct: 1
+  },
+  {
+    q: "Bezpieczne hasło to:",
+    a: ["123456", "Imię psa", "Losowe znaki"],
+    correct: 2
+  },
+  {
+    q: "Czy hejt w internecie to przestępstwo?",
+    a: ["Zawsze", "Nigdy", "Może być"],
+    correct: 2
+  }
+];
+
+let i = 0;
+let score = 0;
+
+const question = document.getElementById("question");
+const answers = document.getElementById("answers");
+const next = document.getElementById("next");
+const result = document.getElementById("result");
+
+function loadQuestion() {
+  next.disabled = true;
+  answers.innerHTML = "";
+  question.textContent = quiz[i].q;
+
+  quiz[i].a.forEach((text, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = text;
+    btn.onclick = () => selectAnswer(index, btn);
+    answers.appendChild(btn);
+  });
+}
+
+function selectAnswer(index, btn) {
+  next.disabled = false;
+
+  [...answers.children].forEach(b => b.disabled = true);
+
+  if (index === quiz[i].correct) {
+    btn.classList.add("correct");
+    score++;
+  } else {
+    btn.classList.add("wrong");
+  }
+}
+
+next.onclick = () => {
+  i++;
+  if (i < quiz.length) {
+    loadQuestion();
+  } else {
+    question.textContent = "Koniec quizu 🎉";
+    answers.innerHTML = "";
+    next.style.display = "none";
+    result.textContent = `Twój wynik: ${score}/${quiz.length}`;
+  }
+};
+
+loadQuestion();
+</script>
+
+<footer>© 2026 • Dzień Bezpiecznego Internetu</footer>
+</body>
+</html>
+
+
+
+

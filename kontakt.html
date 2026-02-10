@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Kontakt | DBI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Skontaktuj się z nami</h1>
+    <nav>
+        <a href="index.html">Strona Główna</a>
+        <a href="zagrozenia.html">Zagrożenia</a>
+        <a href="hasla.html">Hasła</a>
+        <a href="hejt.html">Hejt</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="kontakt.html">Kontakt</a>
+    </nav>
+</header>
+
+<section>
+  <div class="card">
+    <h2>Kontakt</h2>
+
+    <form id="contact">
+      <input type="text" id="name" placeholder="Twoje imię" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <textarea id="message" placeholder="Wiadomość" required></textarea>
+
+      <button type="submit">Wyślij</button>
+      <p id="status"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+const form = document.getElementById("contactForm");
+const status = document.getElementById("status");
+
+form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    status.style.color = "#38bdf8";
+    status.textContent = "Wysyłanie...";
+
+    setTimeout(() => {
+        status.style.color = "#22c55e";
+        status.textContent = "Wiadomość wysłana. Dziękujemy za kontakt.";
+        form.reset();
+    }, 1200);
+});
+</script>
+
+<footer>© 2026 • Dzień Bezpiecznego Internetu</footer>
+</body>
+</html>
+
+
+
